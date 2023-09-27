@@ -28,7 +28,7 @@ const AddProduct = ({}) => {
   const [Content, setContent] = useState<string | undefined>();
   const [describe, setDescribe] = useState("");
   const [isType, setIsType] = useState<any>();
-  const [isParent, setIsParent] = useState("Hộp quà-giỏ quà");
+  const [isParent, setIsParent] = useState("Teraco");
   const [isChildren, setIsChildren] = useState<any>();
   const [typeUrl, setTypeUrl] = useState<string | undefined>();
   const [parentUrl, setParentUrl] = useState<string | undefined>();

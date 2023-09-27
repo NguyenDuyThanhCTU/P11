@@ -257,24 +257,28 @@ export const HeaderItems = [
     link: "gioi-thieu",
   },
   {
-    name: "Xe tải",
-    link: "xe-tai",
+    name: "Teraco",
+    link: "teraco",
   },
   {
-    name: "Xe đầu kéo",
-    link: "xe-dau-keo",
+    name: "SRM",
+    link: "srm",
   },
   {
-    name: "Xe ben",
-    link: "xe-ben",
+    name: "Dothanh",
+    link: "dothanh",
   },
   {
-    name: "Xe chuyên dụng",
-    link: "xe-chuyen-dung",
+    name: "Tata",
+    link: "tata",
   },
   {
-    name: "Phụ tùng",
-    link: "phu-tung",
+    name: "Kenbo",
+    link: "kenbo",
+  },
+  {
+    name: "TMT",
+    link: "tmt",
   },
   {
     name: "Bảng giá xe",
@@ -359,24 +363,28 @@ export const TypePostItems = [
 
 export const TypeProductItems = [
   {
-    label: "Xe Tải",
-    value: "xe-tai",
+    label: "Teraco",
+    value: "teraco",
   },
   {
-    label: "Xe Đầu Kéo",
-    value: "xe-dau-keo",
+    label: "SRM",
+    value: "srm",
   },
   {
-    label: "Xe Ben",
-    value: "xe-ben",
+    label: "Dothanh",
+    value: "dothanh",
   },
   {
-    label: "Xe Chuyên Dụng",
-    value: "xe-chuyen-dung",
+    label: "Tata",
+    value: "tata",
   },
   {
-    label: "Phụ Tùng",
-    value: "phu-tung",
+    label: "Kenbo",
+    value: "kenbo",
+  },
+  {
+    label: "TMT",
+    value: "tmt",
   },
 ];
 

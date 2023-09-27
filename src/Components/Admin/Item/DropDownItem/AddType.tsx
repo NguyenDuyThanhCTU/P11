@@ -23,8 +23,8 @@ type ChangeEventType = React.ChangeEvent<HTMLInputElement>;
 const AddType: React.FC = () => {
   const [Name, setName] = useState<string>("");
   const [Params, setIsParams] = useState<string>("");
-  const [Parent, setParent] = useState<string>("Xe Tải");
-  const [ParentParams, setParentParams] = useState<string>("xe-tai");
+  const [Parent, setParent] = useState<string>("Teraco");
+  const [ParentParams, setParentParams] = useState<string>("teraco");
 
   const [isSelected, setSelected] = useState<number | undefined>();
   const { setIsRefetch, setDropDown } = useStateProvider();

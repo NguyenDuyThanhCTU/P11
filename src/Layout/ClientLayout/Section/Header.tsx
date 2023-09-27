@@ -63,8 +63,12 @@ const Header: React.FC = () => {
       <div className="d:flex flex-col p:hidden ">
         <div className="shadow-sm shadow-gray-200 h-[80px] ">
           <div className="w-[1300px] mx-auto flex justify-between items-center h-full">
-            <div className="w-[15%]">
-              <img src={TradeMarkData.websiteLogo} alt="" />
+            <div className="h-[80px] w-auto">
+              <img
+                src={TradeMarkData.websiteLogo}
+                alt=""
+                className="w-full h-full"
+              />
             </div>
 
             <div className="flex gap-10">
