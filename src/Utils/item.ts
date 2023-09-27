@@ -257,21 +257,32 @@ export const HeaderItems = [
     link: "gioi-thieu",
   },
   {
-    name: "Sản phẩm",
-    link: "san-pham",
-  },
-
-  {
-    name: "Quy trình sản xuất",
-    link: "quy-trinh-san-xuat",
+    name: "Xe tải",
+    link: "xe-tai",
   },
   {
-    name: "Hợp tác",
-    link: "hop-tac",
+    name: "Xe đầu kéo",
+    link: "xe-dau-keo",
   },
   {
-    name: "Tin tức & Sự kiện",
-    link: "tin-tuc-su-kien",
+    name: "Xe ben",
+    link: "xe-ben",
+  },
+  {
+    name: "Xe chuyên dụng",
+    link: "xe-chuyen-dung",
+  },
+  {
+    name: "Phụ tùng",
+    link: "phu-tung",
+  },
+  {
+    name: "Bảng giá xe",
+    link: "bang-gia-xe",
+  },
+  {
+    name: "Tin tức",
+    link: "tin-tuc",
   },
   {
     name: "Liên hệ",
@@ -310,31 +321,82 @@ export const ToolsTipsSocialMediaItems = [
 
 export const TypePostItems = [
   {
-    label: "Tin tức & Sự kiện",
-    value: "news",
+    label: "Khuyến mãi",
+    value: "khuyen-mai",
+    parentUrl: "tin-tuc",
   },
   {
-    label: "Hợp tác",
-    value: "cooperate",
+    label: "Bảng giá xe",
+    value: "bang-gia-xe",
+    parentUrl: "tin-tuc",
   },
   {
-    label: "Quy trình sản xuất",
-    value: "process",
+    label: "Mẫu Thùng Xe",
+    value: "mau-thung-xe",
+    parentUrl: "tin-tuc",
   },
   {
-    label: "Chính sách",
-    value: "policy",
+    label: "Hỏi Đáp Luật Giao Thông",
+    value: "hoi-dap-luat-giao-thong",
+    parentUrl: "tin-tuc",
+  },
+  {
+    label: "Xe và Người Đẹp",
+    value: "xe-va-nguoi-dep",
+    parentUrl: "tin-tuc",
+  },
+  {
+    label: "Đánh Giá Xe",
+    value: "danh-gia-xe",
+    parentUrl: "tin-tuc",
+  },
+  {
+    label: "Thông tư đăng kiểm",
+    value: "thong-tu-dang-kiem",
+    parentUrl: "tin-tuc",
   },
 ];
 
 export const TypeProductItems = [
   {
-    label: "Hộp quà-giỏ quà",
-    value: "hop-qua-gio-qua",
+    label: "Xe Tải",
+    value: "xe-tai",
   },
   {
-    label: "Yến sào",
-    value: "yen-sao",
+    label: "Xe Đầu Kéo",
+    value: "xe-dau-keo",
+  },
+  {
+    label: "Xe Ben",
+    value: "xe-ben",
+  },
+  {
+    label: "Xe Chuyên Dụng",
+    value: "xe-chuyen-dung",
+  },
+  {
+    label: "Phụ Tùng",
+    value: "phu-tung",
   },
 ];
+
+export const IntroduceItems = [
+  {
+    label: "Veam Motor ",
+    value: "veam-motor ",
+  },
+  {
+    label: "Cửu Long TMT",
+    value: "cuu-long-tmt",
+  },
+  {
+    label: "Jac Motor",
+    value: "jac-motor",
+  },
+  {
+    label: "Tuyển dụng",
+    value: "tuyen-dung",
+  },
+];
+
 export {};

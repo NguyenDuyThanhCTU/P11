@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useData } from "../../../Context/DataProviders";
-import { Image } from "antd";
+import { Image, Skeleton, Tabs } from "antd";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -10,10 +10,21 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay } from "swiper";
 import { FiPhoneCall } from "react-icons/fi";
+import { useStateProvider } from "../../../Context/StateProvider";
+import { BiMinus, BiPlus } from "react-icons/bi";
+
+import { FacebookProvider, Comments } from "react-facebook";
+import moment from "moment";
+import Contact from "./Items/Contact";
+import Catelogy from "../../Item/Catelogy";
 
 const ProductDetail = () => {
   const [similarProduct, setSimilarProduct] = useState([]);
   const [ProductFetch, setProductFetch] = useState<any>();
+  const [isCombo, setIsCombo] = useState(1);
+  const [openContact, setOpenContact] = useState<any>(false);
+  const { Sale } = useData();
+  const navigate = useNavigate();
   const { Products } = useData();
   const { id } = useParams();
 
@@ -22,7 +33,7 @@ const ProductDetail = () => {
     if (sort) {
       setProductFetch(sort[0]);
     }
-  }, [id]);
+  }, [id, Products]);
 
   useEffect(() => {
     const similarproduct = Products.filter(
@@ -31,6 +42,44 @@ const ProductDetail = () => {
     setSimilarProduct(similarproduct);
   }, [Products, ProductFetch]);
 
+  const onMinus = () => {
+    if (isCombo > 0) {
+      setIsCombo(isCombo - 1);
+    }
+  };
+
+  const items = [
+    {
+      key: "1",
+      label: "Chi tiết sản phẩm",
+      children: (
+        <>
+          <h3 className="text-[24px] font-semibold ">Chi tiết sản phẩm</h3>
+          <div
+            className=""
+            dangerouslySetInnerHTML={{ __html: ProductFetch?.content }}
+          ></div>
+        </>
+      ),
+    },
+    {
+      key: "2",
+      label: "Bình luận",
+      children: (
+        <>
+          <div className="  ">
+            <FacebookProvider appId="781034490143336">
+              {" "}
+              <Comments
+                href="https://khogachcaocaptinphat.com"
+                width={778}
+              />{" "}
+            </FacebookProvider>
+          </div>
+        </>
+      ),
+    },
+  ];
   return (
     <div className="flex flex-col gap-5 my-16 d:w-[1300px] d:mx-auto p:w-auto p:mx-2">
       <div>
@@ -85,27 +134,28 @@ const ProductDetail = () => {
               <h3 className="text-[26px] uppercase">{ProductFetch?.title}</h3>
               <div className="bg-black w-24 h-1"></div>
             </div>
-            <div className="flex gap-1 flex-col">
-              <span className="text-mainred text-[20px] font-bold">
-                {ProductFetch?.price} VNĐ
-              </span>
-            </div>
+
             <div className="w-[200px] ">
               {ProductFetch?.state ? (
-                <div className="p-3 text-green-500 border border-green-500 rounded-xl font-bold">
+                <div className=" text-green-500 rounded-xl font-bold">
                   Tình trạng: Còn hàng
                 </div>
               ) : (
-                <div className="p-3 text-red-500 border border-red-500 rounded-xl font-bold">
+                <div className=" text-red-500  rounded-xl font-bold">
                   Tình trạng: Hết hàng
                 </div>
               )}
             </div>
 
-            <div className="flex">
-              <div className="py-3 px-8 duration-300 bg-red-500 text-white hover:bg-red-600 rounded-full cursor-pointer flex items-center gap-3">
-                <FiPhoneCall />
-                <span>Liên hệ</span>
+            <div className="flex gap-5">
+              <h2>Đặt hàng:</h2>
+              <div
+                className="py-3 px-6 bg-mainred text-white hover:bg-red-700 rounded-sm cursor-pointer duration-300"
+                onClick={() => {
+                  setOpenContact(true);
+                }}
+              >
+                Liên hệ
               </div>
             </div>
             <div className="py-4 border-t border-b w-full font-light">
@@ -119,44 +169,56 @@ const ProductDetail = () => {
             </div>
           </div>
         </div>
+
         <div className="w-full gap-3 py-2 flex d:flex-row p:flex-col">
-          <div className="d:px-16 py-5 p:px-2 border">
-            <h3 className="text-[24px] font-semibold ">Chi tiết sản phẩm</h3>
-            <div
-              className=""
-              dangerouslySetInnerHTML={{ __html: ProductFetch?.content }}
-            ></div>
+          <div className="d:px-16 py-5 p:px-2 border flex-[100%]">
+            <Tabs
+              defaultActiveKey="1"
+              items={items}
+              className="bg-white px-10 rounded-md font-LexendDeca py-5"
+            />
           </div>
-          <div>
-            <h3 className="text-mainred py-2 border-b-2 border-mainred uppercase font-bold">
-              Sản phẩm liên quan
-            </h3>
+
+          <div className="flex-[30%] flex flex-col gap-5 items-center">
             <div>
-              {similarProduct?.map((item: any, idx: number) => (
-                <>
-                  <div className="flex gap-3 py-3 border-b" key={idx}>
-                    <div className="flex-[30%]">
-                      <img src={item.image} alt="similarProduct" />
-                    </div>
-                    <div className="flex-[60%]">
-                      <h3 className="truncate1">{item.title}</h3>
-                      <h3 className="text-mainred text-[18px] font-bold">
-                        {item.price}
-                      </h3>
-                      <div className="flex">
-                        <div className="py-1 px-4 bg-mainred text-white flex gap-2 items-center text-[15px]">
-                          <FiPhoneCall />
-                          <span>Liên hệ</span>
+              <h3 className="text-mainred py-2 border-b-2 border-mainred uppercase font-bold">
+                Sản phẩm liên quan
+              </h3>
+              <div>
+                {similarProduct?.map((item: any, idx: number) => (
+                  <Link to={`/san-pham/${item.url}`}>
+                    <div className="flex gap-3 py-3 border-b" key={idx}>
+                      <div className="flex-[30%]">
+                        <img src={item.image} alt="similarProduct" />
+                      </div>
+                      <div className="flex-[60%]">
+                        <h3 className="truncate1">{item.title}</h3>
+                        <h3 className="text-mainred text-[18px] font-bold">
+                          {item.price}
+                        </h3>
+                        <div className="flex">
+                          <div className="py-1 px-4 bg-mainred text-white flex gap-2 items-center text-[15px]">
+                            <FiPhoneCall />
+                            <span>Liên hệ</span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </>
-              ))}
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <div>
+              <Catelogy />
             </div>
           </div>
         </div>
       </div>
+      <>
+        {openContact && (
+          <Contact setOpenContact={setOpenContact} OpenContact={openContact} />
+        )}
+      </>
     </div>
   );
 };

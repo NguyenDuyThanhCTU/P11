@@ -54,6 +54,7 @@ const UploadPost: React.FC = () => {
         image: imageUrl,
         type: type,
         url: url,
+        parent: "tin-tuc",
         content: "",
       };
       addDocument("posts", data).then((data) => {

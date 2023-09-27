@@ -1,93 +1,68 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useData } from "../../../Context/DataProviders";
+import { TypePostItems } from "../../../Utils/item";
 
-import { Link, useParams } from "react-router-dom";
-import { Pagination } from "antd";
-import CartNews from "../Item/CartNews";
+import Catelogy from "../../Item/Catelogy";
+import NewsCard from "./Items/NewsCard";
 
-const News: React.FC = () => {
-  const { Posts } = useData();
-  const [currentItems, setCurrentItems] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 16;
+const News = () => {
+  const [DataFetch, setDataFetch] = useState([]);
+  const [Type, setType] = useState("Tin Tức");
+  const { Posts, productTypes } = useData();
   const { id } = useParams();
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
   useEffect(() => {
-    if (id === "tin-tuc-su-kien") {
-      setCurrentItems(
-        Posts.filter((items: any) => items.type === "news").slice(
-          indexOfFirstItem,
-          indexOfLastItem
-        )
-      );
-    }
-    if (id === "hop-tac") {
-      setCurrentItems(
-        Posts.filter((items: any) => items.type === "cooperate").slice(
-          indexOfFirstItem,
-          indexOfLastItem
-        )
-      );
-    }
-    if (id === "quy-trinh-san-xuat") {
-      setCurrentItems(
-        Posts.filter((items: any) => items.type === "process").slice(
-          indexOfFirstItem,
-          indexOfLastItem
-        )
-      );
-    }
-  }, [currentPage, Posts, id]);
+    const sort = TypePostItems.filter((item) => item.value === id);
 
-  const handlePageChange = (pageNumber: any, pageSize: any) => {
-    setCurrentPage(pageNumber);
-  };
+    if (sort.length > 0) {
+      setType(sort[0].label);
+      const data = Posts.filter((item: any) => item.type === id);
+      if (data) {
+        setDataFetch(data);
+      }
+    } else {
+      setType("Tin Tức");
+      const data = Posts.filter((item: any) => item.parent === "tin-tuc");
+      if (data) {
+        setDataFetch(data);
+      }
+    }
+  }, [id, Posts, productTypes]);
 
   return (
-    <div>
-      <div className="my-16 d:w-[1300px] d:mx-auto p:w-auto p:mx-2">
-        <div className="h-10 flex  justify-center items-center gap-5">
-          <div className="bg-[url(https://yensaotrison.com/images/bg_tit.png)] h-4 w-[83px] bg-cover bg-no-repeat"></div>
-          <h3 className="text-mainred text-[30px] uppercase leading-10 font-UTMAmerican font-bold">
-            {id === "tin-tuc-su-kien"
-              ? "Tin tức"
-              : id === "hop-tac"
-              ? "Hợp tác"
-              : id === "quy-trinh-san-xuat" && "Quy trình sản xuất"}
-          </h3>
-          <div className="bg-[url(https://yensaotrison.com/images/bg_tit1.png)] h-4 w-[86px] bg-cover bg-no-repeat"></div>
+    <>
+      <div className="p:w-auto d:w-[1300px] mx-auto flex gap-5 font-LexendDeca d:flex-row p:flex-col">
+        <div className="flex flex-col gap-5 mt-5  h-max p:w-auto px-2 d:w-[1030px]">
+          <h1 className="text-[24px] font-bold text-blue-700 uppercase">
+            {Type}
+          </h1>
+          {DataFetch.length === 0 ? (
+            <div className="flex justify-center w-[1030px]">
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/dora-a85b2.appspot.com/o/UI%2Fgsdfgsdfgsd.jpg?alt=media&token=b98b569d-9504-4c50-be02-f592535c3d53"
+                alt="not found"
+              />
+            </div>
+          ) : (
+            <>
+              {" "}
+              {DataFetch.map((items: any, idx: number) => (
+                <>
+                  <div key={idx}>
+                    <NewsCard Data={items} />
+                  </div>
+                </>
+              ))}
+            </>
+          )}
         </div>
-        <div className="grid d:grid-cols-3 gap-2 py-5 p:grid-cols-1">
-          {currentItems.map((items: any) => {
-            const timestamp = items.createdAt.toDate();
-
-            const year = timestamp.getFullYear();
-            const month = timestamp.getMonth() + 1;
-            const day = timestamp.getDate();
-            return (
-              <Link to={`/bai-viet/${items.url}`}>
-                <CartNews
-                  day={day}
-                  month={month}
-                  year={year}
-                  image={items.image}
-                  title={items.title}
-                />
-              </Link>
-            );
-          })}
+        <div className="flex">
+          <Catelogy />
         </div>
-        {Posts.length > 16 && (
-          <Pagination
-            defaultCurrent={6}
-            total={Posts.length}
-            onChange={handlePageChange}
-          />
-        )}
       </div>
-    </div>
+      ;
+    </>
   );
 };
 

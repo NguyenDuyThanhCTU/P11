@@ -34,7 +34,7 @@ const ClientLayout = ({ children }: any) => {
         <Loading />
       </div>
       <Header />
-      <div>{children}</div>
+      <div className="d:mt-[65px] p:mt-0">{children}</div>
       {/* {location.pathname === "/" ||
       location.pathname === "/lien-he" ||
       location.pathname === "/video" ? (

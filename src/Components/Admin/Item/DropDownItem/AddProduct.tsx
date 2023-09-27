@@ -26,7 +26,7 @@ const AddProduct = ({}) => {
   const [Content, setContent] = useState<string | undefined>();
   const [describe, setDescribe] = useState("");
   const [isType, setIsType] = useState<any>();
-  const [isParent, setIsParent] = useState("Hộp quà-giỏ quà");
+  const [isParent, setIsParent] = useState("Xe Tải");
   const [isChildren, setIsChildren] = useState<any>();
   const [typeUrl, setTypeUrl] = useState<string | undefined>();
   const [parentUrl, setParentUrl] = useState<string | undefined>();
@@ -204,12 +204,7 @@ const AddProduct = ({}) => {
                       Value={Title}
                       setValue={setTitle}
                     />
-                    <Input
-                      text="Giá sản phẩm"
-                      Value={Price}
-                      setValue={setPrice}
-                      Input={true}
-                    />
+
                     <div className="">
                       <label>Thông tin sản phẩm</label>
                       <div
@@ -269,33 +264,6 @@ const AddProduct = ({}) => {
                             ))}
                         </Select>
                       </div>
-                    </div>
-                    <div className="flex flex-col gap-2 w-full">
-                      <label className="text-md font-medium ">
-                        Loại bài viết
-                      </label>
-
-                      <Select
-                        style={{ width: "100%" }}
-                        placeholder="Chọn loại bài viết"
-                        onChange={setIsChildren}
-                        optionLabelProp="label"
-                      >
-                        {productTypes
-                          ?.filter((item: any) => item.type === isType)
-                          .map((item: any, idx: any) => (
-                            <>
-                              {item.children.map((items: any, idx: number) => (
-                                <Option
-                                  value={items.children}
-                                  label={items.children}
-                                >
-                                  <Space>{items.children}</Space>
-                                </Option>
-                              ))}
-                            </>
-                          ))}
-                      </Select>
                     </div>
 
                     <div className="flex flex-col ">
