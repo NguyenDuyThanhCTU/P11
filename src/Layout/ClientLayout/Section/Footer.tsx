@@ -5,7 +5,7 @@ import { Posts } from "../../../Utils/temp";
 
 const Footer: React.FC = () => {
   const { TradeMarkData, ContactData } = useData();
-  console.log();
+
   return (
     <>
       <div>

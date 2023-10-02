@@ -8,7 +8,7 @@ import { useData } from "../../../../Context/DataProviders";
 
 const Section = () => {
   const { Slides } = useData();
-  console.log(Slides);
+
   return (
     <div>
       <Swiper
@@ -28,8 +28,12 @@ const Section = () => {
           <>
             {" "}
             <SwiperSlide>
-              <div>
-                <img src={items.image} alt="slide" />
+              <div className="w-full h-[50vh] overflow-hidden">
+                <img
+                  src={items.image}
+                  alt="slide"
+                  className="w-full h-full object-contain"
+                />
               </div>
             </SwiperSlide>
           </>

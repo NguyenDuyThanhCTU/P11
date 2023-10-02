@@ -22,7 +22,7 @@ const DropDown = ({ content, link, setHidden, idx, dropdown }: any) => {
       } border-t border-gray-200 items-start justify-between py-3  mx-5 flex flex-col`}
     >
       <div className="flex items-center justify-between w-full">
-        <Link to={`/${link}`}>
+        <Link to={`${link}`}>
           <h3
             className="text-[20px] font-normal"
             onClick={() => {
@@ -48,18 +48,18 @@ const DropDown = ({ content, link, setHidden, idx, dropdown }: any) => {
               {" "}
               <div className="flex items-center justify-between">
                 <div
-                  className="p-4 font-light text-black group duration-300 hover:text-white hover:bg-mainpink flex justify-between items-center w-full"
+                  className="p-4 font-light text-black group duration-300 hover:text-mainred hover:bg-mainpink flex justify-between items-center w-full"
                   onClick={() => {
                     HandleOpenSubMenu(idx + 1);
                   }}
                 >
-                  <Link to={`/loai-san-pham/${items.params}`}>
+                  <Link to={`/san-pham/${items.typeUrl}`}>
                     <h3
                       onClick={() => {
                         setHidden(false);
                       }}
                     >
-                      {items.name}
+                      {items.type}
                     </h3>
                   </Link>
                 </div>

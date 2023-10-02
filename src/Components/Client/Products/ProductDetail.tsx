@@ -186,7 +186,7 @@ const ProductDetail = () => {
               </h3>
               <div>
                 {similarProduct?.map((item: any, idx: number) => (
-                  <Link to={`/san-pham/${item.url}`}>
+                  <Link to={`/chi-tiet-san-pham/${item.url}`}>
                     <div className="flex gap-3 py-3 border-b" key={idx}>
                       <div className="flex-[30%]">
                         <img src={item.image} alt="similarProduct" />

@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 const ProductCard = ({ Data }: any) => {
   return (
     <Link to={`/chi-tiet-san-pham/${Data.url}`}>
-      <div className="border cursor-pointer ">
+      <div className="border cursor-pointer h-[320px] ">
         <div className="">
           <div className="p-2">
-            <div className="overflow-hidden  ">
+            <div className="overflow-hidden h-[200px]  ">
               <img
                 src={Data.image}
                 alt="product"

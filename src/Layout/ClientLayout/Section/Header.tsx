@@ -63,13 +63,15 @@ const Header: React.FC = () => {
       <div className="d:flex flex-col p:hidden ">
         <div className="shadow-sm shadow-gray-200 h-[80px] ">
           <div className="w-[1300px] mx-auto flex justify-between items-center h-full">
-            <div className="h-[80px] w-auto">
-              <img
-                src={TradeMarkData.websiteLogo}
-                alt=""
-                className="w-full h-full"
-              />
-            </div>
+            <Link to={`/`}>
+              <div className="h-[80px] w-auto">
+                <img
+                  src={TradeMarkData.websiteLogo}
+                  alt=""
+                  className="w-full h-full"
+                />
+              </div>
+            </Link>
 
             <div className="flex gap-10">
               <div className="flex gap-2 justify-center items-center text-[12px] pl-5 border-l">
@@ -321,13 +323,23 @@ const Header: React.FC = () => {
               (item: any) => item.parentUrl === items.link
             );
 
+            const sortPost = TypePostItems.filter(
+              (data: any) => data.value === items.link
+            );
+
             return (
               <div key={idx}>
                 <DropDown
                   idx={idx}
                   dropdown={sort}
                   content={items.name}
-                  link={items.link}
+                  link={
+                    sort.length > 0
+                      ? `/san-pham/${items.link}`
+                      : sortPost.length > 0
+                      ? `/tin-tuc/${items.link}`
+                      : `/${items.link}`
+                  }
                   setHidden={setHidden}
                 />
               </div>

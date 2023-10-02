@@ -1,9 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useStateProvider } from "../../Context/StateProvider";
 import { useData } from "../../Context/DataProviders";
-import { getAllDocuments } from "../../Config/Services/Firebase/FireStoreDB";
+import {
+  getAllDocuments,
+  getAllProducts,
+} from "../../Config/Services/Firebase/FireStoreDB";
 
 const Fetch: React.FC = () => {
+  const [fetchingData, setFetchingData] = useState(true);
   const {
     // Website
     setSocialMedia,
@@ -23,6 +27,7 @@ const Fetch: React.FC = () => {
     setIntroPhoto,
     setSale,
     setNotification,
+    Products,
     // custom
   } = useData();
 
@@ -87,10 +92,6 @@ const Fetch: React.FC = () => {
       setProductType(data);
     });
 
-    getAllDocuments("products").then((data: any) => {
-      setProducts(data?.reverse());
-    });
-
     getAllDocuments("orders").then((data: any) => {
       setOrders(data?.reverse());
     });
@@ -112,12 +113,29 @@ const Fetch: React.FC = () => {
     setOrders,
     setPosts,
     setProductType,
-    setProducts,
+
     setSlides,
     setSocialMedia,
     setTradeMarkData,
     setVideos,
   ]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      const fetchProductsInterval = setInterval(async () => {
+        const data: any = await getAllProducts("products");
+        setProducts(data.reverse());
+        if (data.length > 0) {
+          clearInterval(fetchProductsInterval); // Dừng interval nếu Products > 0
+        }
+      }, 1000); // Gọi hàm getAllProducts mỗi 1 giây
+
+      // Hủy bỏ interval khi unmount component
+      return () => {
+        clearInterval(fetchProductsInterval);
+      };
+    }, 500);
+  }, [isRefetch, setProducts]);
 
   return <></>;
 };

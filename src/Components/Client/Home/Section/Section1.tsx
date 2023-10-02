@@ -32,8 +32,12 @@ const Section1 = () => {
                 <SwiperSlide>
                   <Link to={`/chi-tiet-san-pham/${items.url}`}>
                     <div className="bg-gray-200 h-[250px] flex flex-col cursor-pointer">
-                      <div>
-                        <img src={items.image} alt="slide" />
+                      <div className="h-[188px] overflow-hidden ">
+                        <img
+                          src={items.image}
+                          alt="slide"
+                          className="h-full w-full object-contain"
+                        />
                       </div>
                       <div className="text-center mt-2">
                         <h2 className="font-semibold text-blue-700 uppercase">
@@ -61,11 +65,15 @@ const Section1 = () => {
               ?.map((items: any, idx: number) => (
                 <Link to={`/chi-tiet-san-pham/${items.url}`}>
                   <div className="border-b  border-blue-500 pb-5  h-[290px] ">
-                    <div>
-                      <img src={items.image} alt="slide" />
+                    <div className="h-[200px]">
+                      <img
+                        src={items.image}
+                        alt="slide"
+                        className="h-full object-contain w-full"
+                      />
                     </div>
-                    <div className="text-center">
-                      <h2 className="font-semibold text-blue-700 uppercase">
+                    <div className="text-center mt-2">
+                      <h2 className="font-semibold text-blue-700 uppercase truncate2">
                         {items.title}{" "}
                       </h2>
                       <p>
