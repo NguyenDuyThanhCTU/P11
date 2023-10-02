@@ -5,13 +5,7 @@ import { useStateProvider } from "../../../Context/StateProvider";
 
 import DropDown from "../Item/DropDown";
 
-import {
-  HeaderItems,
-  IconMapping,
-  SocialMediaCustom,
-  TypePostItems,
-  TypeProductItems,
-} from "../../../Utils/item";
+import { HeaderItems, TypePostItems } from "../../../Utils/item";
 import { RxCross1, RxCross2 } from "react-icons/rx";
 import { MdOutlineFormatListBulleted } from "react-icons/md";
 import {

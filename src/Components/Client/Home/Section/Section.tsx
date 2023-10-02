@@ -5,6 +5,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay } from "swiper";
 import { useData } from "../../../../Context/DataProviders";
+import { Link } from "react-router-dom";
 
 const Section = () => {
   const { Slides } = useData();
@@ -28,13 +29,15 @@ const Section = () => {
           <>
             {" "}
             <SwiperSlide>
-              <div className="w-full h-[50vh] overflow-hidden">
-                <img
-                  src={items.image}
-                  alt="slide"
-                  className="w-full h-full object-contain"
-                />
-              </div>
+              <Link to={`/chi-tiet-san-pham/${items.url}`}>
+                <div className="w-full h-[50vh] overflow-hidden">
+                  <img
+                    src={items.image}
+                    alt="slide"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              </Link>
             </SwiperSlide>
           </>
         ))}

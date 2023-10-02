@@ -77,8 +77,8 @@ const AddProduct = ({}) => {
     setTypeUrl("");
     setParentUrl("");
     setChildrenUrl("");
-    setListSubImage([]);
-    setImageUrl("");
+    // setListSubImage([]);
+    // setImageUrl("");
   };
 
   const HandleSubmit = () => {
@@ -123,7 +123,7 @@ const AddProduct = ({}) => {
         });
 
         setIsRefetch("upload successful");
-        handleDiscard();
+        // handleDiscard();
       });
     }
   };

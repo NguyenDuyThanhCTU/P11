@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Empty, notification } from "antd";
+import { Drawer, Empty, notification } from "antd";
 import ListSlide from "./ListSlide/ListSlide";
 import { useStateProvider } from "../../../../../Context/StateProvider";
 import { addDocument } from "../../../../../Config/Services/Firebase/FireStoreDB";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { uploadImage } from "../../../../Item/Handle";
+import DrawerProducts from "../../../Item/DrawerProducts";
 
 type ChangeEventType = React.ChangeEvent<HTMLInputElement>;
 
@@ -14,6 +15,7 @@ interface SectionProps {
 
 const Section: React.FC<SectionProps> = ({ name }) => {
   const [imageUrl, setImageUrl] = useState<string>("");
+  const [open, setOpen] = useState(false);
   const [Data, setData] = useState<string>("");
   const [selected, setSelected] = useState<boolean>(false);
   const { setIsRefetch } = useStateProvider();
@@ -24,9 +26,10 @@ const Section: React.FC<SectionProps> = ({ name }) => {
     });
   };
 
-  const HandleUpdate = () => {
+  const HandleUpdate = (url: any) => {
     const data = {
       image: `${imageUrl ? imageUrl : Data}`,
+      url: url,
     };
 
     addDocument("slide", data).then(() => {
@@ -37,6 +40,8 @@ const Section: React.FC<SectionProps> = ({ name }) => {
       setIsRefetch("personal title");
       setSelected(false);
       setImageUrl("");
+      setData("");
+      setOpen(false);
     });
   };
 
@@ -97,14 +102,14 @@ const Section: React.FC<SectionProps> = ({ name }) => {
                 <div className="mt-5">
                   <div
                     className="text-center  uppercase py-2 border mx-2 bg-purple hover:bg-purpleAdmin hover:text-purpleHover hover:border-purpleHover text-blueAdmin border-blueAdmin block group-hover:hidden"
-                    onClick={() => HandleUpdate()}
+                    onClick={() => setOpen(true)}
                   >
-                    Cập nhật
+                    Tiếp tục
                   </div>
                 </div>
               ) : (
                 <div className="text-center uppercase py-2 border mx-2 bg-purple  text-gray-400 border-gray-400 block ">
-                  Cập nhật
+                  Tiếp tục
                 </div>
               )}
             </div>
@@ -136,6 +141,15 @@ const Section: React.FC<SectionProps> = ({ name }) => {
           <ListSlide />
         </div>
       </div>
+      <Drawer
+        title="Liên kết với sản phẩm"
+        placement="right"
+        width={730}
+        onClose={() => setOpen(false)}
+        open={open}
+      >
+        <DrawerProducts HandleUpdate={HandleUpdate} />
+      </Drawer>
     </div>
   );
 };

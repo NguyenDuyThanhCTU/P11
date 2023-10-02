@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AiFillCaretDown } from "react-icons/ai";
 // import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { TypePostItems } from "../../../Utils/item";
 
 const DropDown = ({ content, link, setHidden, idx, dropdown }: any) => {
   const [isSelected, setIsSelected] = useState(true);
@@ -33,6 +34,9 @@ const DropDown = ({ content, link, setHidden, idx, dropdown }: any) => {
           </h3>
         </Link>
         {dropdown.length > 1 && (
+          <AiFillCaretDown onClick={() => setIsSelected(!isSelected)} />
+        )}
+        {content === "Tin tức" && (
           <AiFillCaretDown onClick={() => setIsSelected(!isSelected)} />
         )}
       </div>
@@ -98,6 +102,40 @@ const DropDown = ({ content, link, setHidden, idx, dropdown }: any) => {
             </div>
           ))}
         </div>
+      )}
+      {content === "Tin tức" && (
+        <>
+          <div
+            className={`flex flex-col  overflow-y-scroll duration-300 gap-2 my-2 ml-2  ${
+              isSelected ? "h-0" : "h-auto"
+            }`}
+          >
+            {TypePostItems.map((items: any, idx: number) => (
+              <div>
+                {" "}
+                <div className="flex items-center justify-between">
+                  <div
+                    className="p-4 font-light text-black group duration-300 hover:text-mainred hover:bg-mainpink flex justify-between items-center w-full"
+                    onClick={() => {
+                      HandleOpenSubMenu(idx + 1);
+                    }}
+                  >
+                    <Link to={`/tin-tuc/${items.value}`}>
+                      <h3
+                        className="uppercase"
+                        onClick={() => {
+                          setHidden(false);
+                        }}
+                      >
+                        {items.label}
+                      </h3>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

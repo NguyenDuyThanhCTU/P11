@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 function Hotline() {
   const { SocialMedia, ContactData } = useData();
+  console.log(ContactData);
 
   return (
     <div className="fixed bottom-7 right-10  box-border flex flex-col gap-5">
@@ -25,16 +26,18 @@ function Hotline() {
           <SiZalo className=" w-full h-full p-3" />
         </a>
       </div>
-      <Link to={`tel:${ContactData.phone}`}>
-        <div className="flex items-center">
-          <div className="text-black font-semibold d:flex p:hidden justify-start items-center rounded-full w-[250px]  h-[60px] bg-white shadow-2xl absolute right-5">
-            <span className="ml-5">Liên hệ với chúng tôi</span>
-          </div>
-          <div className="h-14 w-14   call-animation">
-            <BiPhoneCall className="text-white text-[40px]" />
-          </div>
+
+      <div
+        className="flex items-center"
+        onClick={() => window.open(`tel:${ContactData.phone}`)}
+      >
+        <div className="text-black font-semibold d:flex p:hidden justify-start items-center rounded-full w-[250px]  h-[60px] bg-white shadow-2xl absolute right-5">
+          <span className="ml-5">Liên hệ với chúng tôi</span>
         </div>
-      </Link>
+        <div className="h-14 w-14   call-animation">
+          <BiPhoneCall className="text-white text-[40px]" />
+        </div>
+      </div>
     </div>
   );
 }

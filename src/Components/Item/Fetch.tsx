@@ -123,12 +123,14 @@ const Fetch: React.FC = () => {
   useEffect(() => {
     setTimeout(() => {
       const fetchProductsInterval = setInterval(async () => {
-        const data: any = await getAllProducts("products");
+        console.log("fetch");
+        const data: any = await getAllDocuments("products");
         setProducts(data.reverse());
+
         if (data.length > 0) {
-          clearInterval(fetchProductsInterval); // Dừng interval nếu Products > 0
+          clearInterval(fetchProductsInterval);
         }
-      }, 1000); // Gọi hàm getAllProducts mỗi 1 giây
+      }, 1000);
 
       // Hủy bỏ interval khi unmount component
       return () => {
