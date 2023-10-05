@@ -77,8 +77,8 @@ const AddProduct = ({}) => {
     setTypeUrl("");
     setParentUrl("");
     setChildrenUrl("");
-    // setListSubImage([]);
-    // setImageUrl("");
+    setListSubImage([]);
+    setImageUrl("");
   };
 
   const HandleSubmit = () => {
@@ -122,8 +122,9 @@ const AddProduct = ({}) => {
           description: `Sản phẩm của bạn đã được tải lên !`,
         });
 
-        setIsRefetch("upload successful");
-        // handleDiscard();
+        setIsRefetch("CRUD products");
+        setDropDown("");
+        handleDiscard();
       });
     }
   };

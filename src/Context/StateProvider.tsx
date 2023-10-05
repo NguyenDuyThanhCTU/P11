@@ -33,6 +33,7 @@ export const StateContext = createContext<StateContextType>({
 export const StateProvider = ({ children }: Props) => {
   const [isDropDown, setDropDown] = useState("");
   const [isRefetch, setIsRefetch] = useState("");
+
   const [isSelected, setSelected] = useState(0);
   const [Search, setSearch] = useState("");
   //custom

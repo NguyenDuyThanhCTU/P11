@@ -12,7 +12,6 @@ import { useLocation } from "react-router-dom";
 import Loading from "../../Components/Item/Loading";
 import { useStateProvider } from "../../Context/StateProvider";
 import { Spin } from "antd";
-import { getAllDocuments } from "../../Config/Services/Firebase/FireStoreDB";
 
 const ClientLayout = ({ children }: any) => {
   const { TradeMarkData, Products } = useData();
@@ -39,7 +38,7 @@ const ClientLayout = ({ children }: any) => {
           <>
             <div className="z-[100] fixed top-0 left-0 right-0 bottom-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
               <div className="fixed top-0 left-0 w-screen h-screen bg-gray-500 bg-opacity-75 flex justify-center items-center">
-                <div className="text-xl font-bold text-primary flex flex-col items-center">
+                <div className="text-xl font-bold text-primary flex  flex-col items-center">
                   <Spin />
                 </div>
               </div>

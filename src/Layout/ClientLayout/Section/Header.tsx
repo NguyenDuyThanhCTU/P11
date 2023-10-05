@@ -14,7 +14,7 @@ import {
   AiOutlineSearch,
 } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
-import HeaderFormDropDown from "../Item/HeaderFormDropDown";
+
 
 const Header: React.FC = () => {
   const [Keyword, setKeyword] = useState("");
@@ -256,6 +256,7 @@ const Header: React.FC = () => {
                     type="text"
                     className="outline-none p-2 w-full border"
                     placeholder="Search..."
+                    onChange={()=>HandleSearch()}
                   />
                   <div className="px-3 flex items-center text-white bg-black hover:bg-mainred duration-300 text-[22px]  cursor-pointer">
                     <AiOutlineSearch />
@@ -276,7 +277,7 @@ const Header: React.FC = () => {
           </div>
 
           <div className="absolute left-0">
-            <img
+            <img  
               src="https://otoanphuoc.com/imgs/layout/nav_mn_before.png"
               alt="header"
             />

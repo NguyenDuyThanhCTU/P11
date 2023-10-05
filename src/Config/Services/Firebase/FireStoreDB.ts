@@ -15,8 +15,56 @@ import {
   limit,
   startAfter,
   startAt,
+  getCountFromServer,
+  limitToLast,
 } from "firebase/firestore";
 import { db } from "../../Firebase";
+
+export const GetProducts = async (Collection: string) => {
+  try {
+    const data: Array<any> = [];
+    let lastDocument: any = null;
+
+    let interval; // Khai báo biến interval ở đây để sử dụng ngoài vòng while
+
+    while (true) {
+      const queryToExecute = lastDocument
+        ? query(
+            collection(db, Collection),
+            orderBy("createdAt"),
+            startAfter(lastDocument),
+            limit(20)
+          )
+        : query(collection(db, Collection), orderBy("createdAt"), limit(20));
+
+      const querySnapshot = await getDocs(queryToExecute);
+
+      if (querySnapshot.docs.length !== 0) {
+        clearInterval(interval); // Dừng interval nếu querySnapshot.docs.length !== 0
+      }
+
+      console.log(querySnapshot.docs.length);
+
+      if (querySnapshot.empty) {
+        break;
+      }
+      querySnapshot.forEach((doc: any) => {
+        const createdAt = doc.data().createdAt.toDate();
+        const serverTime = Timestamp.now().toDate();
+        const timeDiff = serverTime.getTime() - createdAt.getTime();
+        const daysDiff = Math.round(timeDiff / 86400000);
+
+        data.push({ id: doc.id, ...doc.data(), daysSinceCreation: daysDiff });
+      });
+
+      lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
+    }
+
+    return data;
+  } catch (error) {
+    console.error("Error fetching documents: ", error);
+  }
+};
 
 export const addDocument = async (Collection: string, data: any) => {
   data.createdAt = serverTimestamp();
@@ -111,14 +159,12 @@ export const getAllDocuments = async (Collection: string) => {
   }
 };
 
-
-
 export const getAllProducts = async (Collection: string) => {
   try {
     const q = query(
       collection(db, Collection),
       orderBy("createdAt"),
-      limit(10)
+      limitToLast(5)
     );
     const querySnapshot = await getDocs(q);
     const data: Array<any> = [];

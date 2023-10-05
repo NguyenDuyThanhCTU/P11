@@ -4,6 +4,8 @@ import Section1 from "./Section/Section1";
 import { useData } from "../../../Context/DataProviders";
 
 const Home = () => {
+  const { Products } = useData();
+
   return (
     <div>
       <Section />

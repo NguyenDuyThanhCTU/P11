@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 function Hotline() {
   const { SocialMedia, ContactData } = useData();
-  console.log(ContactData);
 
   return (
     <div className="fixed bottom-7 right-10  box-border flex flex-col gap-5">
